@@ -15,8 +15,12 @@ public class App {
 
     public static void main(String[] args) {
 
-        if (args.length < 1) {
-            System.out.println("BRRRRRRR: no Token specified");
+        System.out.println();
+        System.out.println("Arguments: BOT_TOKEN GUILD_ID");
+        System.out.println();
+
+        if (args.length < 2) {
+            System.out.println("NOT ENOUGH ARGUMENTS");
         }
 
         FallbackLoggerConfiguration.setDebug(true);
@@ -28,7 +32,7 @@ public class App {
                 .login()
                 .join();
 
-        Server server = api.getServerById(821017221170069524L).get();
+        Server server = api.getServerById(Long.parseLong(args[1])).get();
 
         User selfUser = api.getYourself();
 
@@ -47,8 +51,9 @@ public class App {
         timer.scheduleAtFixedRate(timerTask, millisToNextMinute(),  60000);
     }
 
+    //have 5 second as buffer
     private static long millisToNextMinute() {
-        LocalDateTime nextMinute = LocalDateTime.now().plusMinutes(1).truncatedTo(ChronoUnit.MINUTES);
+        LocalDateTime nextMinute = LocalDateTime.now().plusMinutes(1).plusSeconds(5).truncatedTo(ChronoUnit.MINUTES);
         return LocalDateTime.now().until(nextMinute, ChronoUnit.MILLIS);
     }
 }

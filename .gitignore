@@ -1,3 +1,5 @@
 /test/
 /.idea
 /target/
+/out/
+/META-INF/
