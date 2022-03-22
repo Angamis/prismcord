@@ -41,7 +41,7 @@ public class TimedRename {
 
     private static void updateNameToTimeNow(User selfUser , Server server) {
 
-        String time = new SimpleDateFormat("EEE h:mm a", Locale.ENGLISH).format(new Date());
+        String time = new SimpleDateFormat("EEE hh:mm a", Locale.ENGLISH).format(new Date());
 
         selfUser.updateNickname(server, time);
     }
@@ -50,5 +50,4 @@ public class TimedRename {
         LocalDateTime nextMinute = LocalDateTime.now().plusMinutes(1).truncatedTo(ChronoUnit.MINUTES).plusSeconds(1);
         return LocalDateTime.now().until(nextMinute, ChronoUnit.MILLIS);
     }
-
 }
