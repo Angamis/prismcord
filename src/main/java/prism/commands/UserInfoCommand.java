@@ -10,6 +10,7 @@ import org.javacord.api.util.logging.ExceptionLogger;
 public class UserInfoCommand implements MessageCreateListener, CommandStructure {
 
     private static final String COMMAND_NAME = "userInfo";
+    private static final String COMMAND_DESCRIPTION = "a command that shows some user information of the invoking user";
 
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
@@ -42,6 +43,6 @@ public class UserInfoCommand implements MessageCreateListener, CommandStructure 
     }
 
     public static String getCommandDescription() {
-        return "a command that shows some user information of the invoking user";
+        return COMMAND_DESCRIPTION;
     }
 }

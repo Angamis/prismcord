@@ -8,9 +8,6 @@ import org.javacord.api.entity.user.User;
 import org.javacord.api.util.logging.FallbackLoggerConfiguration;
 import prism.commands.UserInfoCommand;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class App {
 
     @SuppressWarnings({"java:S3655", "java:S106"})
@@ -40,6 +37,8 @@ public class App {
         api.updateActivity(ActivityType.WATCHING, "FFXIV Server Time");
 
         //ADD LISTENERS
+        api.addReconnectListener(new UpdatePresenceReconnect());
+
         api.addMessageCreateListener(new UserInfoCommand());
 
     }

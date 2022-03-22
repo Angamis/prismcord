@@ -7,6 +7,7 @@ public class ChangePrefixCommand implements MessageCreateListener, CommandStruct
 
     private static String prefix = "*";
     private static final String COMMAND_NAME = "prefix";
+    private static final String COMMAND_DESCRIPTION = "a command that changes the prefix of the bot";
 
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
@@ -15,6 +16,8 @@ public class ChangePrefixCommand implements MessageCreateListener, CommandStruct
 
         if(event.getMessageContent().contains(completeCommand)) {
             //TODO change prefix and parse message and do sanity checks on it !! .contains is used
+
+            setPrefix("*");
         }
 
     }
@@ -22,12 +25,16 @@ public class ChangePrefixCommand implements MessageCreateListener, CommandStruct
     public static String getCommandName() {
         return COMMAND_NAME;
     }
-//TODO
+
     public static String getCommandDescription() {
-        return "null";
+        return COMMAND_DESCRIPTION;
     }
 
     public static String getPrefix() {
         return prefix;
+    }
+
+    private static void setPrefix(String string) {
+        prefix = string;
     }
 }
