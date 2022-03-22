@@ -8,7 +8,10 @@ import org.javacord.api.util.logging.FallbackLoggerConfiguration;
 
 public class App {
 
+    @SuppressWarnings({"java:S3655", "java:S106"})
     public static void main(String[] args) {
+
+        FallbackLoggerConfiguration.setDebug(true);
 
         System.out.println();
         System.out.println("Arguments: BOT_TOKEN GUILD_ID");
@@ -17,8 +20,6 @@ public class App {
         if (args.length < 2) {
             System.out.println("NOT ENOUGH ARGUMENTS");
         }
-
-        FallbackLoggerConfiguration.setDebug(true);
 
         String token = args[0];
         DiscordApi api = new DiscordApiBuilder()
@@ -30,6 +31,5 @@ public class App {
         User selfUser = api.getYourself();
 
         TimedRename.setUpTimer(selfUser, server);
-
     }
 }
