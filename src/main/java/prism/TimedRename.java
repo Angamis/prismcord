@@ -47,7 +47,7 @@ public class TimedRename {
     }
 
     private static long millisToNextMinute() {
-        LocalDateTime nextMinute = LocalDateTime.now().plusMinutes(1).plusSeconds(5).truncatedTo(ChronoUnit.MINUTES);
+        LocalDateTime nextMinute = LocalDateTime.now().plusMinutes(1).truncatedTo(ChronoUnit.MINUTES).plusSeconds(1);
         return LocalDateTime.now().until(nextMinute, ChronoUnit.MILLIS);
     }
 
