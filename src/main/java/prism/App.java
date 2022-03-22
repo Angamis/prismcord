@@ -6,6 +6,10 @@ import org.javacord.api.entity.activity.ActivityType;
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
 import org.javacord.api.util.logging.FallbackLoggerConfiguration;
+import prism.commands.UserInfoCommand;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class App {
 
@@ -32,6 +36,11 @@ public class App {
         User selfUser = api.getYourself();
 
         TimedRename.setUpTimer(selfUser, server);
+        //TODO move this into a command as well but keep here for init
         api.updateActivity(ActivityType.WATCHING, "FFXIV Server Time");
+
+        //ADD LISTENERS
+        api.addMessageCreateListener(new UserInfoCommand());
+
     }
 }
