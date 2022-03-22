@@ -2,6 +2,7 @@ package prism;
 
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
+import org.javacord.api.entity.activity.ActivityType;
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
 import org.javacord.api.util.logging.FallbackLoggerConfiguration;
@@ -31,5 +32,6 @@ public class App {
         User selfUser = api.getYourself();
 
         TimedRename.setUpTimer(selfUser, server);
+        api.updateActivity(ActivityType.WATCHING, "FFXIV Server Time");
     }
 }
