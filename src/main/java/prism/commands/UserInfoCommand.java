@@ -26,7 +26,8 @@ public class UserInfoCommand implements MessageCreateListener, CommandStructure 
                     .addField("User Id", author.getIdAsString(), true)
                     .setAuthor(author);
 
-            author.asUser().ifPresent(user -> embed.addField("Online Status", user.getStatus().getStatusString(), true));
+            author.asUser()
+                    .ifPresent(user -> embed.addField("Online Status", user.getStatus().getStatusString(), true));
 
             event.getMessage().getServer()
                     .ifPresent(server -> embed.addField("Server Admin", author.isServerAdmin() ? "yes" : "no", true));
