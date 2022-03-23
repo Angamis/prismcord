@@ -7,6 +7,7 @@ import org.javacord.api.exception.MissingPermissionsException;
 import org.javacord.api.listener.message.MessageCreateListener;
 import org.javacord.api.util.logging.ExceptionLogger;
 import prism.App;
+import prism.CommandStructure;
 
 public class UserInfoCommand implements MessageCreateListener, CommandStructure {
 
