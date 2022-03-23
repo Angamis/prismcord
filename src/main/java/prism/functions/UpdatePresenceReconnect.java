@@ -1,4 +1,4 @@
-package prism;
+package prism.functions;
 
 import org.javacord.api.DiscordApi;
 import org.javacord.api.entity.activity.ActivityType;
