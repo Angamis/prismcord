@@ -15,9 +15,9 @@ public class UserInfoCommand implements MessageCreateListener, CommandStructure 
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
 
-        String completeCommand = App.getPrefix() + COMMAND_NAME;
+        String ownCommand = App.getPrefix() + COMMAND_NAME;
 
-        if (event.getMessageContent().equalsIgnoreCase(completeCommand)) {
+        if (event.getMessageContent().equalsIgnoreCase(ownCommand)) {
             MessageAuthor author = event.getMessage().getAuthor();
             EmbedBuilder embed = new EmbedBuilder()
                     .setTitle("User Info")
