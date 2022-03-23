@@ -1,4 +1,4 @@
-package prism;
+package prism.functions;
 
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
