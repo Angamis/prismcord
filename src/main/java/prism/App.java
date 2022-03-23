@@ -6,7 +6,10 @@ import org.javacord.api.entity.activity.ActivityType;
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
 import org.javacord.api.util.logging.FallbackLoggerConfiguration;
+import prism.commands.ChangeTimeZoneCommand;
 import prism.commands.UserInfoCommand;
+
+import java.util.TimeZone;
 
 public class App {
 
@@ -25,10 +28,6 @@ public class App {
 
         FallbackLoggerConfiguration.setDebug(true);
 
-        System.out.println();
-        System.out.println("Arguments: BOT_TOKEN GUILD_ID");
-        System.out.println();
-
         if (args.length < 2) {
             System.out.println("NOT ENOUGH ARGUMENTS");
         }
@@ -42,14 +41,16 @@ public class App {
         Server server = api.getServerById(Long.parseLong(args[1])).get();
         User selfUser = api.getYourself();
 
-        TimedRename.setUpTimer(selfUser, server);
-        //TODO move this into a command as well but keep here for init
+        TimedBotName.setUpTimer(selfUser, server, TimeZone.getTimeZone("GMT"));
         api.updateActivity(ActivityType.WATCHING, "FFXIV Server Time");
 
         //ADD LISTENERS
         api.addReconnectListener(new UpdatePresenceReconnect());
+
         UserInfoCommand userInfoCommand = new UserInfoCommand();
         api.addMessageCreateListener(userInfoCommand);
 
+        ChangeTimeZoneCommand changeTimeZoneCommand = new ChangeTimeZoneCommand();
+        api.addMessageCreateListener(changeTimeZoneCommand);
     }
 }
