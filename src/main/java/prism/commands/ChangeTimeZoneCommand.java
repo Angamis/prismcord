@@ -19,7 +19,8 @@ public class ChangeTimeZoneCommand implements MessageCreateListener, CommandStru
 
         String ownCommand = App.getPrefix() + COMMAND_NAME;
 
-        if (event.getMessageContent().substring(0, ownCommand.length()).equalsIgnoreCase(ownCommand)) {
+        if (event.getMessageContent().toLowerCase().contains(ownCommand.toLowerCase())
+                && event.getMessageContent().substring(0, ownCommand.length()).equalsIgnoreCase(ownCommand)) {
 
             String timeZoneName = event.getMessageContent().substring(ownCommand.length() + 1);
             TimeZone timeZone = TimeZone.getTimeZone(timeZoneName);
