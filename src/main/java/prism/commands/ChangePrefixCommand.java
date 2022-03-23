@@ -3,6 +3,7 @@ package prism.commands;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 import prism.App;
+import prism.CommandStructure;
 
 public class ChangePrefixCommand implements MessageCreateListener, CommandStructure {
 
