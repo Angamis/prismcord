@@ -2,26 +2,37 @@ package prism.commands;
 
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
-
-import static prism.App.getPrefix;
-import static prism.App.setPrefix;
+import prism.App;
 
 public class ChangePrefixCommand implements MessageCreateListener, CommandStructure {
 
-    private final String COMMAND_NAME = "prefix";
-    private final String COMMAND_DESCRIPTION = "a command that changes the prefix of the bot";
+    private static final String COMMAND_NAME = "prefix";
 
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
 
-        String completeCommand = getPrefix() + COMMAND_NAME;
+        String ownCommand = App.getPrefix() + COMMAND_NAME;
+        String messageContent = event.getMessageContent();
 
-        if(event.getMessageContent().contains(completeCommand)) {
-            //TODO change prefix and parse message and do sanity checks on it !! .contains is used
+        if(messageContent.toLowerCase().contains(ownCommand.toLowerCase())
+                && messageContent.substring(0, ownCommand.length()).equalsIgnoreCase(ownCommand)) {
 
-            setPrefix("*");
+            String newPossiblePrefix;
+
+            if (messageContent.length() == ownCommand.length() + 2) {
+                newPossiblePrefix = messageContent.substring(ownCommand.length() + 1);
+
+                if(newPossiblePrefix.matches("[`~!@#$%^&*_|+\\-=?;:'\",.<>\\\\]")) {
+                    App.setPrefix(newPossiblePrefix);
+                    event.getChannel().sendMessage("New Prefix: " + newPossiblePrefix);
+                } else {
+                    event.getChannel().sendMessage("'" + newPossiblePrefix + "' is no valid Prefix!");
+                }
+            } else {
+                String errorMessage = "The new command must be one character only and must be given in the format: \n" + ownCommand + " new_prefix";
+                event.getChannel().sendMessage(errorMessage);
+            }
         }
-
     }
 
     @Override
@@ -31,7 +42,6 @@ public class ChangePrefixCommand implements MessageCreateListener, CommandStruct
 
     @Override
     public String getCommandDescription() {
-        return COMMAND_DESCRIPTION;
+        return "a command that changes the prefix of the bot";
     }
-
 }
