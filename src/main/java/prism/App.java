@@ -8,13 +8,19 @@ import org.javacord.api.entity.user.User;
 import org.javacord.api.util.logging.FallbackLoggerConfiguration;
 import prism.commands.ChangePrefixCommand;
 import prism.commands.ChangeTimeZoneCommand;
+import prism.commands.CommandsInfoCommand;
 import prism.commands.UserInfoCommand;
+import prism.functions.TimedBotName;
+import prism.functions.UpdatePresenceReconnect;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 public class App {
 
     private static String prefix = "*";
+    private static final Map<String, String> commandsMap = new HashMap<>();
 
     public static void setPrefix(String newPrefix) {
         prefix = newPrefix;
@@ -22,6 +28,10 @@ public class App {
 
     public static String getPrefix() {
         return prefix;
+    }
+
+    public static Map<String, String> getCommandsMap() {
+        return commandsMap;
     }
 
     @SuppressWarnings({"java:S3655", "java:S106"})
@@ -42,19 +52,29 @@ public class App {
         Server server = api.getServerById(Long.parseLong(args[1])).get();
         User selfUser = api.getYourself();
 
+        //INITIALIZE BOT WITH STATUS AND NAME CHANGE
         TimedBotName.setUpTimer(selfUser, server, TimeZone.getTimeZone("GMT"));
         api.updateActivity(ActivityType.WATCHING, "FFXIV Server Time");
 
         //ADD LISTENERS
         api.addReconnectListener(new UpdatePresenceReconnect());
 
-        UserInfoCommand userInfoCommand = new UserInfoCommand();
-        api.addMessageCreateListener(userInfoCommand);
+        ChangePrefixCommand changePrefixCommand = new ChangePrefixCommand();
+        api.addMessageCreateListener(changePrefixCommand);
 
         ChangeTimeZoneCommand changeTimeZoneCommand = new ChangeTimeZoneCommand();
         api.addMessageCreateListener(changeTimeZoneCommand);
 
-        ChangePrefixCommand changePrefixCommand = new ChangePrefixCommand();
-        api.addMessageCreateListener(changePrefixCommand);
+        CommandsInfoCommand commandsInfoCommand = new CommandsInfoCommand();
+        api.addMessageCreateListener(commandsInfoCommand);
+
+        UserInfoCommand userInfoCommand = new UserInfoCommand();
+        api.addMessageCreateListener(userInfoCommand);
+
+        //REGISTER COMMANDS FOR USER QUERY
+        commandsMap.put(changePrefixCommand.getCommandName(), changePrefixCommand.getCommandDescription());
+        commandsMap.put(changeTimeZoneCommand.getCommandName(), changeTimeZoneCommand.getCommandDescription());
+        commandsMap.put(commandsInfoCommand.getCommandName(), commandsInfoCommand.getCommandDescription());
+        commandsMap.put(userInfoCommand.getCommandName(), userInfoCommand.getCommandDescription());
     }
 }
