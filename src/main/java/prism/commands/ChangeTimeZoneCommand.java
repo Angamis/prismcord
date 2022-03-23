@@ -5,7 +5,8 @@ import org.javacord.api.entity.server.Server;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 import prism.App;
-import prism.TimedBotName;
+import prism.CommandStructure;
+import prism.functions.TimedBotName;
 
 import java.util.Optional;
 import java.util.TimeZone;
