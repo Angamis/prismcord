@@ -6,6 +6,7 @@ import org.javacord.api.entity.activity.ActivityType;
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
 import org.javacord.api.util.logging.FallbackLoggerConfiguration;
+import prism.commands.ChangePrefixCommand;
 import prism.commands.ChangeTimeZoneCommand;
 import prism.commands.UserInfoCommand;
 
@@ -52,5 +53,8 @@ public class App {
 
         ChangeTimeZoneCommand changeTimeZoneCommand = new ChangeTimeZoneCommand();
         api.addMessageCreateListener(changeTimeZoneCommand);
+
+        ChangePrefixCommand changePrefixCommand = new ChangePrefixCommand();
+        api.addMessageCreateListener(changePrefixCommand);
     }
 }
