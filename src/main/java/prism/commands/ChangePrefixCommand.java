@@ -3,11 +3,13 @@ package prism.commands;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
+import static prism.App.getPrefix;
+import static prism.App.setPrefix;
+
 public class ChangePrefixCommand implements MessageCreateListener, CommandStructure {
 
-    private static String prefix = "*";
-    private static final String COMMAND_NAME = "prefix";
-    private static final String COMMAND_DESCRIPTION = "a command that changes the prefix of the bot";
+    private final String COMMAND_NAME = "prefix";
+    private final String COMMAND_DESCRIPTION = "a command that changes the prefix of the bot";
 
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
@@ -22,19 +24,14 @@ public class ChangePrefixCommand implements MessageCreateListener, CommandStruct
 
     }
 
-    public static String getCommandName() {
+    @Override
+    public String getCommandName() {
         return COMMAND_NAME;
     }
 
-    public static String getCommandDescription() {
+    @Override
+    public String getCommandDescription() {
         return COMMAND_DESCRIPTION;
     }
 
-    public static String getPrefix() {
-        return prefix;
-    }
-
-    private static void setPrefix(String string) {
-        prefix = string;
-    }
 }

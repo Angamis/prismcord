@@ -2,11 +2,7 @@ package prism.commands;
 
 public interface CommandStructure {
 
-    static String getCommandName() {
-        return null;
-    }
+    String getCommandName();
 
-    static String getCommandDescription() {
-        return null;
-    }
+    String getCommandDescription();
 }

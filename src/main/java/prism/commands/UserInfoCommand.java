@@ -6,16 +6,17 @@ import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.exception.MissingPermissionsException;
 import org.javacord.api.listener.message.MessageCreateListener;
 import org.javacord.api.util.logging.ExceptionLogger;
+import prism.App;
 
 public class UserInfoCommand implements MessageCreateListener, CommandStructure {
 
-    private static final String COMMAND_NAME = "userInfo";
-    private static final String COMMAND_DESCRIPTION = "a command that shows some user information of the invoking user";
+    private final String COMMAND_NAME = "userInfo";
+    private final String COMMAND_DESCRIPTION = "a command that shows some user information of the invoking user";
 
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
 
-        String completeCommand = ChangePrefixCommand.getPrefix() + COMMAND_NAME;
+        String completeCommand = App.getPrefix() + COMMAND_NAME;
 
         if (event.getMessageContent().equalsIgnoreCase(completeCommand)) {
             MessageAuthor author = event.getMessage().getAuthor();
@@ -38,11 +39,13 @@ public class UserInfoCommand implements MessageCreateListener, CommandStructure 
         }
     }
 
-    public static String getCommandName() {
+    @Override
+    public String getCommandName() {
         return COMMAND_NAME;
     }
 
-    public static String getCommandDescription() {
+    @Override
+    public String getCommandDescription() {
         return COMMAND_DESCRIPTION;
     }
 }

@@ -10,6 +10,16 @@ import prism.commands.UserInfoCommand;
 
 public class App {
 
+    private static String prefix = "*";
+
+    public static void setPrefix(String newPrefix) {
+        prefix = newPrefix;
+    }
+
+    public static String getPrefix() {
+        return prefix;
+    }
+
     @SuppressWarnings({"java:S3655", "java:S106"})
     public static void main(String[] args) {
 
@@ -38,8 +48,8 @@ public class App {
 
         //ADD LISTENERS
         api.addReconnectListener(new UpdatePresenceReconnect());
-
-        api.addMessageCreateListener(new UserInfoCommand());
+        UserInfoCommand userInfoCommand = new UserInfoCommand();
+        api.addMessageCreateListener(userInfoCommand);
 
     }
 }
