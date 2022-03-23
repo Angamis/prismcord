@@ -1,4 +1,4 @@
-package prism.commands;
+package prism;
 
 public interface CommandStructure {
 
