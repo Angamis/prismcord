@@ -1,4 +1,4 @@
-package prism;
+package prism.functions;
 
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
@@ -8,9 +8,11 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-public class TimedRename {
+public class TimedBotName {
 
-    private TimedRename() {
+    private static final Timer timer = new Timer();
+
+    private TimedBotName() {
 
     }
 
@@ -20,12 +22,11 @@ public class TimedRename {
      * @param selfUser the BOT User
      * @param server the server the BOT should change its name on
      */
-    public static void setUpTimer(User selfUser, Server server) {
+    public static void setUpTimer(User selfUser, Server server, TimeZone timeZone) {
 
-        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+        TimeZone.setDefault(timeZone);
         updateNameToTimeNow(selfUser, server);
 
-        Timer timer = new Timer();
         timer.scheduleAtFixedRate(runTimerTask(selfUser, server), millisToNextMinute(),  60000);
     }
 
@@ -46,6 +47,10 @@ public class TimedRename {
         selfUser.updateNickname(server, time);
     }
 
+    /**
+     *
+     * @return milliseconds + 1000 to the next full minute
+     */
     private static long millisToNextMinute() {
         LocalDateTime nextMinute = LocalDateTime.now().plusMinutes(1).truncatedTo(ChronoUnit.MINUTES).plusSeconds(1);
         return LocalDateTime.now().until(nextMinute, ChronoUnit.MILLIS);
