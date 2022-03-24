@@ -51,13 +51,18 @@ public class ChangePresenceCommand implements MessageCreateListener, CommandStru
         String givenActivity = userInput.substring((App.getPrefix() + COMMAND_NAME).length() + 1,
                 (App.getPrefix() + COMMAND_NAME).length() + 2);
 
-        return switch (givenActivity) {
-            case "1" -> ActivityType.WATCHING;
-            case "2" -> ActivityType.COMPETING;
-            case "3" -> ActivityType.LISTENING;
-            case "4" -> ActivityType.PLAYING;
-            default -> null;
-        };
+        switch (givenActivity) {
+            case "1":
+                return ActivityType.WATCHING;
+            case "2":
+                return ActivityType.COMPETING;
+            case "3":
+                return ActivityType.LISTENING;
+            case "4":
+                return ActivityType.PLAYING;
+            default:
+                return null;
+        }
     }
 
     private String getExplanatoryMessage() {
