@@ -1,4 +1,6 @@
-# prismcord Time BOT
+# prismcord Discord Time BOT
+
+Made for selfhosting.
 
 Shows the time as its own nickname.
  Has basic setting to adjust the timezone and its presence.
