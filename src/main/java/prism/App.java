@@ -68,6 +68,9 @@ public class App {
         ChangePrefixCommand changePrefixCommand = new ChangePrefixCommand();
         api.addMessageCreateListener(changePrefixCommand);
 
+        ChangePresenceCommand changePresenceCommand = new ChangePresenceCommand();
+        api.addMessageCreateListener(changePresenceCommand);
+
         ChangeTimeZoneCommand changeTimeZoneCommand = new ChangeTimeZoneCommand();
         api.addMessageCreateListener(changeTimeZoneCommand);
 
@@ -82,6 +85,7 @@ public class App {
 
         //REGISTER COMMANDS FOR USER QUERY
         commandsMap.put(changePrefixCommand.getCommandName(), changePrefixCommand.getCommandDescription());
+        commandsMap.put(changePresenceCommand.getCommandName(), changePresenceCommand.getCommandDescription());
         commandsMap.put(changeTimeZoneCommand.getCommandName(), changeTimeZoneCommand.getCommandDescription());
         commandsMap.put(commandsInfoCommand.getCommandName(), commandsInfoCommand.getCommandDescription());
         commandsMap.put(userInfoCommand.getCommandName(), userInfoCommand.getCommandDescription());
