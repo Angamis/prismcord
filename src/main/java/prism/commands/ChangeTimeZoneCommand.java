@@ -19,11 +19,12 @@ public class ChangeTimeZoneCommand implements MessageCreateListener, CommandStru
     public void onMessageCreate(MessageCreateEvent event) {
 
         String ownCommand = App.getPrefix() + COMMAND_NAME;
+        String messageContent = event.getMessageContent();
 
-        if (event.getMessageContent().toLowerCase().contains(ownCommand.toLowerCase())
-                && event.getMessageContent().substring(0, ownCommand.length()).equalsIgnoreCase(ownCommand)) {
+        if (messageContent.toLowerCase().contains(ownCommand.toLowerCase())
+                && messageContent.substring(0, ownCommand.length()).equalsIgnoreCase(ownCommand)) {
 
-            String timeZoneName = event.getMessageContent().substring(ownCommand.length() + 1);
+            String timeZoneName = messageContent.substring(ownCommand.length() + 1);
             TimeZone timeZone = TimeZone.getTimeZone(timeZoneName);
 
             DiscordApi api = event.getApi();
