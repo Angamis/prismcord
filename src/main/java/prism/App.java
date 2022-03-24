@@ -6,10 +6,7 @@ import org.javacord.api.entity.activity.ActivityType;
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
 import org.javacord.api.util.logging.FallbackLoggerConfiguration;
-import prism.commands.ChangePrefixCommand;
-import prism.commands.ChangeTimeZoneCommand;
-import prism.commands.CommandsInfoCommand;
-import prism.commands.UserInfoCommand;
+import prism.commands.*;
 import prism.functions.TimedBotName;
 import prism.functions.UpdatePresenceReconnect;
 
@@ -77,6 +74,9 @@ public class App {
         CommandsInfoCommand commandsInfoCommand = new CommandsInfoCommand();
         api.addMessageCreateListener(commandsInfoCommand);
 
+        MentionCommand mentionCommand = new MentionCommand();
+        api.addMessageCreateListener(mentionCommand);
+
         UserInfoCommand userInfoCommand = new UserInfoCommand();
         api.addMessageCreateListener(userInfoCommand);
 
@@ -84,6 +84,7 @@ public class App {
         commandsMap.put(changePrefixCommand.getCommandName(), changePrefixCommand.getCommandDescription());
         commandsMap.put(changeTimeZoneCommand.getCommandName(), changeTimeZoneCommand.getCommandDescription());
         commandsMap.put(commandsInfoCommand.getCommandName(), commandsInfoCommand.getCommandDescription());
+        commandsMap.put(mentionCommand.getCommandName(), mentionCommand.getCommandDescription());
         commandsMap.put(userInfoCommand.getCommandName(), userInfoCommand.getCommandDescription());
     }
 }
