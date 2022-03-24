@@ -27,7 +27,9 @@ public class ChangePresenceCommand implements MessageCreateListener, CommandStru
             if (activityType ==  null) {
                 event.getChannel().sendMessage("No valid activity type was given, use a number from 1 to 4.");
             } else if (messageContent.length() > (ownCommand.length() + 2)) {
-                api.updateActivity(activityType, messageContent.substring(ownCommand.length() + 2));
+                String newActivity = messageContent.substring(ownCommand.length() + 2);
+                api.updateActivity(activityType, newActivity);
+                App.setPresenceString(newActivity);
             } else {
                 api.unsetActivity();
             }
