@@ -84,7 +84,6 @@ public class App {
         commandsMap.put(changePrefixCommand.getCommandName(), changePrefixCommand.getCommandDescription());
         commandsMap.put(changeTimeZoneCommand.getCommandName(), changeTimeZoneCommand.getCommandDescription());
         commandsMap.put(commandsInfoCommand.getCommandName(), commandsInfoCommand.getCommandDescription());
-        commandsMap.put(mentionCommand.getCommandName(), mentionCommand.getCommandDescription());
         commandsMap.put(userInfoCommand.getCommandName(), userInfoCommand.getCommandDescription());
     }
 }
