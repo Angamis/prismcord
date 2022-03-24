@@ -20,17 +20,26 @@ public class ChangeTimeZoneCommand implements MessageCreateListener, CommandStru
 
         String ownCommand = App.getPrefix() + COMMAND_NAME;
         String messageContent = event.getMessageContent();
+        boolean validCommand = messageContent.toLowerCase().contains(ownCommand.toLowerCase())
+                && messageContent.substring(0, ownCommand.length()).equalsIgnoreCase(ownCommand);
 
-        if (messageContent.toLowerCase().contains(ownCommand.toLowerCase())
-                && messageContent.substring(0, ownCommand.length()).equalsIgnoreCase(ownCommand)) {
+        if (validCommand && messageContent.length() > (ownCommand.length() + 1)) {
 
             String timeZoneName = messageContent.substring(ownCommand.length() + 1);
             TimeZone timeZone = TimeZone.getTimeZone(timeZoneName);
+            event.getChannel().sendMessage("Chosen timezone: " + timeZone.getDisplayName());
 
             DiscordApi api = event.getApi();
             Optional<Server> serverOptional = event.getServer();
 
             serverOptional.ifPresent(server -> TimedBotName.setUpTimer(api.getYourself(), server, timeZone));
+
+        } else if (validCommand) {
+            event.getChannel().sendMessage("Please give a Timezone in the format:\n\n" +
+
+                    "> " + ownCommand + " TIMEZONE\n\n" +
+
+                    "If no valid Timezone is given it defaults to GMT.");
         }
     }
 
