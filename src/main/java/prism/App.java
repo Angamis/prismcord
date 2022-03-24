@@ -21,6 +21,7 @@ public class App {
 
     private static String prefix = "*";
     private static final Map<String, String> commandsMap = new HashMap<>();
+    private static String presenceString = "FFXIV Server Time";
 
     public static void setPrefix(String newPrefix) {
         prefix = newPrefix;
@@ -32,6 +33,14 @@ public class App {
 
     public static Map<String, String> getCommandsMap() {
         return commandsMap;
+    }
+
+    public static void setPresenceString(String string) {
+        presenceString = string;
+    }
+
+    public static String getPresenceString() {
+        return presenceString;
     }
 
     @SuppressWarnings({"java:S3655", "java:S106"})
